@@ -15,7 +15,10 @@ class Machine < ApplicationRecord
   end
 
   def qty_snacks
-    # snacks.count.distinct
-    snacks.group(:name).pluck(:name).count
+    snacks.select(:name)
+          .distinct
+          .count
+
+    # snacks.group(:name).pluck(:name).count
   end
 end
