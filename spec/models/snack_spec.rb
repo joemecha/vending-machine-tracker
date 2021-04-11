@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Snack, type: :model do
   before(:each) do
-
-    # add objects here
-
+    @caleb = Owner.create!(name: "Caleb's Compassionate Snacks")
+    @pearl = @caleb.machines.create!(location: "Pearl Street")
+    @kale_chips = @pearl.snacks.create!(name: "Kale Chips", price: 5.50)
+    @soy_nuts = @pearl.snacks.create!(name: "Soy Nutty", price: 4.75)
   end
+
   describe 'validations' do
     it { should validate_presence_of :name }
     it { should validate_presence_of :price }
@@ -14,12 +16,14 @@ RSpec.describe Snack, type: :model do
   end
 
   describe 'class methods do' do
-    describe "#methodname" do
-
-    end
   end
 
   describe 'instance methods' do
-    describe ".methodname"
+    describe ".formatted_price" do
+      it "displays price as $0.00" do
+        expect(@kale_chips.formatted_price).to eq("$5.50")
+        expect(@soy_nuts.formatted_price).to eq("$4.75")
+      end
+    end
   end
 end
