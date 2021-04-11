@@ -6,13 +6,6 @@ Vending machines may be stocked with different snacks, and the same snack may be
 ​
 ## Be sure to read all user stories BEFORE beginning your work
 
-## Setup
-
-- Fork and clone this repo
-- Perform the usual setup steps after cloning a Rails application
-
-
-
 ## Requirements
 
 - TDD all new work; you may postpone model tests for attribute validations only
