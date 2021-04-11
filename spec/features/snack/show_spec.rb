@@ -8,15 +8,19 @@ RSpec.describe 'a snack show page' do
     @yoga_plot = @caleb.machines.create!(location: "Hot Yoga Studio Parking Lot")
     @soro_hill = @caleb.machines.create!(location: "Some Sorority on the Hill")
 
-    @kale_chips = @pearl.snacks.create!(name: "Kale Chips", price: 5.50)
-    @soy_nuts = @pearl.snacks.create!(name: "Soy Nutty", price: 4.75)
-    @one_grape = @pearl.snacks.create!(name: "A Grape", price: 0.25)
+    @kale_chips = Snack.create!(name: "Kale Chips", price: 5.50)
+    @soy_nuts = Snack.create!(name: "Soy Nutty", price: 4.75)
+    @one_grape = Snack.create!(name: "A Grape", price: 0.25)
 
-    @kale_chips = @yoga_plot.snacks.create!(name: "Kale Chips", price: 5.50)
-    @soy_nuts = @yoga_plot.snacks.create!(name: "Soy Nutty", price: 4.75)
+    MachineSnack.create(machine_id: 1, snack_id: 1)
+    MachineSnack.create(machine_id: 1, snack_id: 2)
+    MachineSnack.create(machine_id: 1, snack_id: 3)
 
-    @soy_nuts = @soro_hill.snacks.create!(name: "Soy Nutty", price: 4.75)
-    @one_grape = @soro_hill.snacks.create!(name: "A Grape", price: 1.25)
+    MachineSnack.create(machine_id: 2, snack_id: 1)
+    MachineSnack.create(machine_id: 2, snack_id: 2)
+
+    MachineSnack.create(machine_id: 3, snack_id: 2)
+    MachineSnack.create(machine_id: 3, snack_id: 3)
 
     visit "/snacks/#{@soy_nuts.id}"
   end
@@ -28,9 +32,9 @@ RSpec.describe 'a snack show page' do
 
   it "lists the locations of vending machines carrying it" do
     within "#locations" do
-      expect(page).to have_content(@pearl.name)
-      expect(page).to have_content(@yoga_plot.name)
-      expect(page).to have_content(@soro_hill.name)
+      expect(page).to have_content(@pearl.location)
+      expect(page).to have_content(@yoga_plot.location)
+      expect(page).to have_content(@soro_hill.location)
     end
   end
 
@@ -45,9 +49,9 @@ RSpec.describe 'a snack show page' do
 
   it "shows the average price of snacks in each vending machine that's shown" do
     within "#locations" do
-      expect(@pearl.avg_price).to eq("$3.50")
-      expect(@yoga_plot.avg_price).to eq("$5.13")
-      expect(@soro_hill.avg_price).to eq("$3.00")
+      expect(@pearl.avg_snack_price).to eq("$3.50")
+      expect(@yoga_plot.avg_snack_price).to eq("$5.12")
+      expect(@soro_hill.avg_snack_price).to eq("$2.50")
     end
   end
 end
