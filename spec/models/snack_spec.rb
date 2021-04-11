@@ -16,9 +16,6 @@ RSpec.describe Snack, type: :model do
     it { should have_many(:machines).through :machine_snacks }
   end
 
-  # describe 'class methods do' do
-  # end
-
   describe 'instance methods' do
     describe ".formatted_price" do
       it "displays price as $0.00" do

@@ -7,10 +7,15 @@ class Machine < ApplicationRecord
 
   def avg_snack_price
     result = snacks.average(:price)
-    if result 
+    if result
       "$" + sprintf("%.2f", result)
     else
       "$0.00"
     end
+  end
+
+  def qty_snacks
+    # snacks.count.distinct
+    snacks.group(:name).pluck(:name).count
   end
 end
