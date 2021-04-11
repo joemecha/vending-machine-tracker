@@ -21,4 +21,9 @@ RSpec.describe 'the vending machine show' do
     expect(page).to have_content(@soy_nuts.name)
     expect(page).to have_content(@soy_nuts.price)
   end
+
+  it "displays prices with $ and rounded to 2 places" do
+    expect(page).to have_content("$5.50")
+    expect(page).to have_content("$4.75")
+  end
 end

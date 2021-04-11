@@ -3,6 +3,6 @@
 <% @machine.snacks.each do |snack| %>
   <section id="snack-<%= snack.id %>">
     <h4> <%= snack.name %> </h4>
-    <p> $<%= snack.price.round(2) %></p>
+    <p> <%= snack.formatted_price %></p>
   </section>
 <% end %>
